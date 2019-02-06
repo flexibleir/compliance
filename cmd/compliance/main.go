@@ -56,6 +56,12 @@ func main() {
 
 	api.ComplianceCreateHandler = compliance.CreateHandlerFunc(
 		func(params compliance.CreateParams) middleware.Responder {
+
+			// remove known hosts in the compliance system
+			rmcmd := "rm /root/.ssh/known_hosts -f"
+			rmcmd1 := exec.Command("sh", "-c", rmcmd)
+			rmcmd1.CombinedOutput()
+
 			id := swag.StringValue(&params.Body.ID)
 			if id == "" {
 				id = "0"
