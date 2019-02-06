@@ -54,7 +54,7 @@ func main() {
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
 
-	api.ComplianceGetIDHandler = compliance.CreateHandlerFunc(
+	api.ComplianceCreateHandler = compliance.CreateHandlerFunc(
 		func(params compliance.CreateParams) middleware.Responder {
 			id := swag.StringValue(&params.Body.ID)
 			if id == "" {

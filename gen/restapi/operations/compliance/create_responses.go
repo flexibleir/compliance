@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"compliance/gen/models"
+	models "compliance/gen/models"
 )
 
 // CreateCreatedCode is the HTTP code returned for type CreateCreated
@@ -30,6 +30,7 @@ type CreateCreated struct {
 
 // NewCreateCreated creates CreateCreated with default headers values
 func NewCreateCreated() *CreateCreated {
+
 	return &CreateCreated{}
 }
 

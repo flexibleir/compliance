@@ -29,16 +29,36 @@ type Getjob struct {
 	Progress int64 `json:"progress,omitempty"`
 
 	// result
-	Result Ruleresultarray `json:"result"`
+	Result Ruleresultarray `json:"result,omitempty"`
 }
 
 // Validate validates this getjob
 func (m *Getjob) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateResult(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Getjob) validateResult(formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Result) { // not required
+		return nil
+	}
+
+	if err := m.Result.Validate(formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("result")
+		}
+		return err
+	}
+
 	return nil
 }
 

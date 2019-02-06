@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"compliance/gen/models"
+	models "compliance/gen/models"
 )
 
 // GetIDOKCode is the HTTP code returned for type GetIDOK
@@ -30,6 +30,7 @@ type GetIDOK struct {
 
 // NewGetIDOK creates GetIDOK with default headers values
 func NewGetIDOK() *GetIDOK {
+
 	return &GetIDOK{}
 }
 
