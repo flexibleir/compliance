@@ -54,7 +54,7 @@ Sample Response
 If it is hard to get the target machine to get in the network then you can use below commands to create an target system.
 
 ```
-docker run -it --privileged --name target flexibleir/ubuntu-ssh:0.2 /bin/bash
+docker run -it --privileged --name target flexibleir/ubuntu-ssh:0.1 /bin/bash
 service ssh restart
 useradd --create-home --shell /bin/bash --groups sudo <User name to be added for this container>
 passwd <User name to be added for this container>
