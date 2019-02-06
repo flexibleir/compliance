@@ -1,4 +1,4 @@
-[swagger]: https://github.com/akshayvenkatesha/compliance/blob/master/swagger/swagger.yml
+[swagger]: https://github.com/flexibleir/compliance/blob/master/swagger/swagger.yml
 
 # compliance
 
@@ -12,7 +12,7 @@ This Image is used for compliance scans on the target system.
 ## Create compliance container
 Run below commands which will download and create a compliance container with the container name **compliance**.
 ```
-docker run -it --privileged --name compliance akshayvenkatesha/compliance:0.2 /main
+docker run -it --privileged --name compliance flexibleir/compliance:0.1 /main
 ```
 
 compliance container will expose **REST Endpoint** with [Swagger][swagger] specification for management operation.
