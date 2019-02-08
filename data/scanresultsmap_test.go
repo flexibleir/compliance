@@ -90,4 +90,7 @@ func TestAddOrUpdateResult(t *testing.T) {
 	resultValue1, exists1 := scanResultRetrived.Results[rule+"1"]
 	assert.True(t, exists1)
 	assert.Equal(t, result+"1", resultValue1)
+
+	_, exists2 := scanResultRetrived.Results["dummy"]
+	assert.False(t, exists2)
 }
