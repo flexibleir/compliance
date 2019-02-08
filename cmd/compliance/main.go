@@ -18,6 +18,16 @@ import (
 var portFlag = flag.Int("port", 8080, "Port to run this service on")
 var idMap = make(map[string]string)
 
+func execute(cmd *string) (string, error) {
+	rmcmd1 := exec.Command("sh", "-c", *cmd)
+	outByteArr, err := rmcmd1.CombinedOutput()
+	if err != nil {
+		return "", err
+	}
+	outputStr := string(outByteArr)
+	return outputStr, nil
+}
+
 func main() {
 	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
 	if err != nil {
