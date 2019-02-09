@@ -1,11 +1,17 @@
 package scanresultsmap
 
-import "errors"
+import (
+	"compliance/constants"
+	"errors"
+)
 
 // ScanResult - Scan Result
 type ScanResult struct {
-	Compliancetype string
+	ComplianceType constants.ComplianceType
 	Results        map[string]string
+	TotalRules     int32
+	ScanStatus     constants.ScanStatus
+	ErrorMessage   string
 }
 
 // ScanResultsMap - Scan Result Map

@@ -6,7 +6,7 @@ import (
 
 func TestExecute(t *testing.T) {
 	cmd := "date"
-	output, err := execute(&cmd)
+	output, err := Execute(cmd)
 	if err != nil {
 		t.Errorf("Execute failed for command %s with error", cmd)
 		t.Error(err)
@@ -17,7 +17,7 @@ func TestExecute(t *testing.T) {
 
 func TestExecuteWrongCommand(t *testing.T) {
 	cmd := "wrongCommand"
-	_, err := execute(&cmd)
+	_, err := Execute(cmd)
 	if err == nil {
 		t.Errorf("Execute is expected to fail for cmd %s but did not fail", cmd)
 	}

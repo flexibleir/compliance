@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compliance/execution"
 	"compliance/gen/models"
 	"compliance/gen/restapi"
 	"compliance/gen/restapi/operations"
@@ -78,6 +79,8 @@ func main() {
 				password = "password"
 			}
 			job := &models.Createjob{ID: id, Hostname: &hostName, Username: &userName, Password: &password}
+
+			execution.Execute("apple")
 
 			// cmd1 := exec.Command(fmt.Sprintf("ssh akshay@{s} \"bash -s\" < ubuntu16Harden.sh", hostName))
 			cmd := fmt.Sprintf("sshpass -p %s ssh -o StrictHostKeyChecking=no %s@%s \"bash -s\" < /home/akshay/ubuntu16Harden.sh", password, userName, hostName)

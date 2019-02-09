@@ -14,29 +14,29 @@ func GetUUID() string {
 
 func TestAddOrUpdatedScanResult(t *testing.T) {
 	scanResult := ScanResult{
-		Compliancetype: "A",
+		ComplianceType: "A",
 	}
 	id := GetUUID()
 	AddOrUpdatedScanResult(id, scanResult)
 	returnedScanResult, _ := GetScanResult(id)
-	assert.Equal(t, scanResult.Compliancetype, returnedScanResult.Compliancetype,
+	assert.Equal(t, scanResult.ComplianceType, returnedScanResult.ComplianceType,
 		"Compliance types should be same")
 
-	scanResult.Compliancetype = "B"
+	scanResult.ComplianceType = "B"
 
 	returnedScanResult2, _ := GetScanResult(id)
-	assert.NotEqual(t, scanResult.Compliancetype, returnedScanResult2.Compliancetype,
+	assert.NotEqual(t, scanResult.ComplianceType, returnedScanResult2.ComplianceType,
 		"Compliance types should not be same")
 
 	AddOrUpdatedScanResult(id, scanResult)
 	returnedScanResult3, _ := GetScanResult(id)
-	assert.Equal(t, scanResult.Compliancetype, returnedScanResult3.Compliancetype,
+	assert.Equal(t, scanResult.ComplianceType, returnedScanResult3.ComplianceType,
 		"Compliance types should be same")
 }
 
 func TestAddOrUpdatedScanResultMultipleAddition(t *testing.T) {
 	scanResult := ScanResult{
-		Compliancetype: "A",
+		ComplianceType: "A",
 	}
 	id := GetUUID()
 	countBefore := len(ScanResultsMap)
@@ -65,7 +65,7 @@ func TestAddOrUpdateResultWithOutScanResult(t *testing.T) {
 func TestAddOrUpdateResult(t *testing.T) {
 
 	scanResult := ScanResult{
-		Compliancetype: "A",
+		ComplianceType: "A",
 		Results:        make(map[string]string),
 	}
 	id := GetUUID()
