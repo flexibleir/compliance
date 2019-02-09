@@ -17,6 +17,11 @@ import (
 // swagger:model createjob
 type Createjob struct {
 
+	// compliancetype
+	// Required: true
+	// Min Length: 1
+	Compliancetype *string `json:"compliancetype"`
+
 	// hostname
 	// Required: true
 	// Min Length: 1
@@ -41,6 +46,10 @@ type Createjob struct {
 func (m *Createjob) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCompliancetype(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateHostname(formats); err != nil {
 		res = append(res, err)
 	}
@@ -60,6 +69,19 @@ func (m *Createjob) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *Createjob) validateCompliancetype(formats strfmt.Registry) error {
+
+	if err := validate.Required("compliancetype", "body", m.Compliancetype); err != nil {
+		return err
+	}
+
+	if err := validate.MinLength("compliancetype", "body", string(*m.Compliancetype), 1); err != nil {
+		return err
+	}
+
 	return nil
 }
 

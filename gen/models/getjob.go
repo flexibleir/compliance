@@ -16,8 +16,8 @@ import (
 // swagger:model getjob
 type Getjob struct {
 
-	// completed
-	Completed bool `json:"completed,omitempty"`
+	// compliancetype
+	Compliancetype string `json:"compliancetype,omitempty"`
 
 	// hostname
 	Hostname string `json:"hostname,omitempty"`
@@ -30,6 +30,9 @@ type Getjob struct {
 
 	// result
 	Result Ruleresultarray `json:"result,omitempty"`
+
+	// scanstatus
+	Scanstatus string `json:"scanstatus,omitempty"`
 }
 
 // Validate validates this getjob

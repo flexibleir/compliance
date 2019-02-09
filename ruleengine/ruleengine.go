@@ -33,7 +33,8 @@ func RunRules(login *logindetails.LoginDetails, scanResult *scanresultsmap.ScanR
 	for _, file := range files {
 		output, err := execution.ExecuteScriptRemote(path.Join(folderPath, file.Name()), login)
 		if err != nil {
-			scanResult.Results[file.Name()] = "Error"
+			scanResult.Results[file.Name()] = "Error-" + err.Error()
+			scanResult.ErrorMessage = err.Error()
 		} else {
 			scanResult.Results[file.Name()] = strings.Trim(output, "\n")
 		}

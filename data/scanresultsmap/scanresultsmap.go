@@ -8,6 +8,7 @@ import (
 
 // ScanResult - Scan Result
 type ScanResult struct {
+	HostName       string
 	ComplianceType compliancetype.ComplianceType
 	Results        map[string]string
 	TotalRules     int

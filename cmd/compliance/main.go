@@ -11,6 +11,7 @@ import (
 	"compliance/gen/restapi/operations/compliance"
 	"compliance/ruleengine"
 	"flag"
+	"fmt"
 	"log"
 	"os/exec"
 
@@ -42,10 +43,11 @@ func main() {
 			if id == "" {
 				id = "0"
 			}
-			var hostname string
+			var errorMessage string
 			scanResult, err := scanresultsmap.GetScanResult(id)
 			if err != nil {
-				hostname = "error - id is wrong"
+				errorMessage = "error - id is wrong"
+				fmt.Println(errorMessage)
 			}
 
 			results := models.Ruleresultarray{}
@@ -54,7 +56,10 @@ func main() {
 				result := models.Ruleresult{Result: value, Rulename: key}
 				results = append(results, &result)
 			}
-			job := &models.Getjob{ID: id, Hostname: hostname, Progress: 100, Result: results}
+
+			progress := (int64)(scanResult.TotalRules/len(scanResult.Results)) * 100
+
+			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress, Result: results, Compliancetype: "CiS", Scanstatus: "Completed"}
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
 
@@ -71,20 +76,12 @@ func main() {
 				id = "0"
 			}
 			hostName := swag.StringValue(params.Body.Hostname)
-			if hostName == "" {
-				hostName = "localhost"
-			}
 			userName := swag.StringValue(params.Body.Username)
-			if userName == "" {
-				userName = "root"
-			}
 			password := swag.StringValue(params.Body.Password)
-			if password == "" {
-				password = "password"
-			}
 			job := &models.Createjob{ID: id, Hostname: &hostName, Username: &userName, Password: &password}
 
 			scanResult := scanresultsmap.ScanResult{
+				HostName:       hostName,
 				ComplianceType: compliancetype.CiS,
 				Results:        make(map[string]string),
 			}

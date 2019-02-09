@@ -67,7 +67,7 @@ type CreateDefault struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.Error `json:"body,omitempty"`
+	Payload *models.Errorresponse `json:"body,omitempty"`
 }
 
 // NewCreateDefault creates CreateDefault with default headers values
@@ -93,13 +93,13 @@ func (o *CreateDefault) SetStatusCode(code int) {
 }
 
 // WithPayload adds the payload to the create default response
-func (o *CreateDefault) WithPayload(payload *models.Error) *CreateDefault {
+func (o *CreateDefault) WithPayload(payload *models.Errorresponse) *CreateDefault {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the create default response
-func (o *CreateDefault) SetPayload(payload *models.Error) {
+func (o *CreateDefault) SetPayload(payload *models.Errorresponse) {
 	o.Payload = payload
 }
 

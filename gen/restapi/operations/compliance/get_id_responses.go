@@ -67,7 +67,7 @@ type GetIDDefault struct {
 	/*
 	  In: Body
 	*/
-	Payload *models.Error `json:"body,omitempty"`
+	Payload *models.Errorresponse `json:"body,omitempty"`
 }
 
 // NewGetIDDefault creates GetIDDefault with default headers values
@@ -93,13 +93,13 @@ func (o *GetIDDefault) SetStatusCode(code int) {
 }
 
 // WithPayload adds the payload to the get ID default response
-func (o *GetIDDefault) WithPayload(payload *models.Error) *GetIDDefault {
+func (o *GetIDDefault) WithPayload(payload *models.Errorresponse) *GetIDDefault {
 	o.Payload = payload
 	return o
 }
 
 // SetPayload sets the payload to the get ID default response
-func (o *GetIDDefault) SetPayload(payload *models.Error) {
+func (o *GetIDDefault) SetPayload(payload *models.Errorresponse) {
 	o.Payload = payload
 }
 
