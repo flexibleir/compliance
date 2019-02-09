@@ -16,6 +16,7 @@ definitions:
       - hostname
       - username
       - password
+      - compliancetype
     properties:
       id:
         type: string
@@ -29,6 +30,9 @@ definitions:
       password:
         type: string
         minLength: 1
+      compliancetype:
+        type: string
+        minLength: 1
   getjob:
     type: object
     properties:
@@ -38,19 +42,20 @@ definitions:
         type: string
       progress:
         type: integer
-        format: int64
-      completed:
-        type: boolean
+        format: int
+      scanstatus:
+        type: string
+      compliancetype:
+        type: string
       result:
         $ref: '#/definitions/ruleresultarray'
-  error:
+  errorresponse:
     type: object
     required:
       - message
     properties:
       code:
-        type: integer
-        format: int64
+        type: string
       message:
         type: string
   ruleresultarray:
@@ -84,7 +89,7 @@ paths:
         default:
           description: error
           schema:
-            $ref: "#/definitions/error"
+            $ref: "#/definitions/errorresponse"
   /{id}:
     parameters:
       - type: string
@@ -102,7 +107,7 @@ paths:
         default:
           description: error
           schema:
-            $ref: "#/definitions/error"
+            $ref: "#/definitions/errorresponse"
 
           
 

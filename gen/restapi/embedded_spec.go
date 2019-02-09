@@ -59,7 +59,7 @@ func init() {
           "default": {
             "description": "error",
             "schema": {
-              "$ref": "#/definitions/error"
+              "$ref": "#/definitions/errorresponse"
             }
           }
         }
@@ -80,7 +80,7 @@ func init() {
           "default": {
             "description": "error",
             "schema": {
-              "$ref": "#/definitions/error"
+              "$ref": "#/definitions/errorresponse"
             }
           }
         }
@@ -101,9 +101,14 @@ func init() {
       "required": [
         "hostname",
         "username",
-        "password"
+        "password",
+        "compliancetype"
       ],
       "properties": {
+        "compliancetype": {
+          "type": "string",
+          "minLength": 1
+        },
         "hostname": {
           "type": "string",
           "minLength": 1
@@ -122,15 +127,14 @@ func init() {
         }
       }
     },
-    "error": {
+    "errorresponse": {
       "type": "object",
       "required": [
         "message"
       ],
       "properties": {
         "code": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "message": {
           "type": "string"
@@ -140,8 +144,8 @@ func init() {
     "getjob": {
       "type": "object",
       "properties": {
-        "completed": {
-          "type": "boolean"
+        "compliancetype": {
+          "type": "string"
         },
         "hostname": {
           "type": "string"
@@ -151,10 +155,13 @@ func init() {
         },
         "progress": {
           "type": "integer",
-          "format": "int64"
+          "format": "int"
         },
         "result": {
           "$ref": "#/definitions/ruleresultarray"
+        },
+        "scanstatus": {
+          "type": "string"
         }
       }
     },
@@ -219,7 +226,7 @@ func init() {
           "default": {
             "description": "error",
             "schema": {
-              "$ref": "#/definitions/error"
+              "$ref": "#/definitions/errorresponse"
             }
           }
         }
@@ -240,7 +247,7 @@ func init() {
           "default": {
             "description": "error",
             "schema": {
-              "$ref": "#/definitions/error"
+              "$ref": "#/definitions/errorresponse"
             }
           }
         }
@@ -261,9 +268,14 @@ func init() {
       "required": [
         "hostname",
         "username",
-        "password"
+        "password",
+        "compliancetype"
       ],
       "properties": {
+        "compliancetype": {
+          "type": "string",
+          "minLength": 1
+        },
         "hostname": {
           "type": "string",
           "minLength": 1
@@ -282,15 +294,14 @@ func init() {
         }
       }
     },
-    "error": {
+    "errorresponse": {
       "type": "object",
       "required": [
         "message"
       ],
       "properties": {
         "code": {
-          "type": "integer",
-          "format": "int64"
+          "type": "string"
         },
         "message": {
           "type": "string"
@@ -300,8 +311,8 @@ func init() {
     "getjob": {
       "type": "object",
       "properties": {
-        "completed": {
-          "type": "boolean"
+        "compliancetype": {
+          "type": "string"
         },
         "hostname": {
           "type": "string"
@@ -311,10 +322,13 @@ func init() {
         },
         "progress": {
           "type": "integer",
-          "format": "int64"
+          "format": "int"
         },
         "result": {
           "$ref": "#/definitions/ruleresultarray"
+        },
+        "scanstatus": {
+          "type": "string"
         }
       }
     },
