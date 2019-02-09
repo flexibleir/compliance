@@ -13,11 +13,11 @@ import (
 )
 
 // RunRules - runes the rules based on compliance type
-func RunRules(comType compliancetype.ComplianceType, login *logindetails.LoginDetails, scanResult *scanresultsmap.ScanResult) error {
+func RunRules(login *logindetails.LoginDetails, scanResult *scanresultsmap.ScanResult) error {
 	var folderPath string
-	if comType == compliancetype.CiS {
-		folderPath = ".././scripts/cis/mini"
-	} else if comType == compliancetype.PcI {
+	if scanResult.ComplianceType == compliancetype.CiS {
+		folderPath = "/home/akshay/go/src/compliance/scripts/cis/mini"
+	} else if scanResult.ComplianceType == compliancetype.PcI {
 		folderPath = ".././scripts/pci/mini"
 	} else {
 		return errors.New("Compliance type not supported")

@@ -1,13 +1,16 @@
 package main
 
 import (
-	"compliance/execution"
+	"compliance/constants/compliancetype"
+	"compliance/constants/scanstatus"
+	"compliance/data/logindetails"
+	"compliance/data/scanresultsmap"
 	"compliance/gen/models"
 	"compliance/gen/restapi"
 	"compliance/gen/restapi/operations"
 	"compliance/gen/restapi/operations/compliance"
+	"compliance/ruleengine"
 	"flag"
-	"fmt"
 	"log"
 	"os/exec"
 
@@ -40,16 +43,17 @@ func main() {
 				id = "0"
 			}
 			var hostname string
-			value, od := idMap[id]
-			if !od {
+			scanResult, err := scanresultsmap.GetScanResult(id)
+			if err != nil {
 				hostname = "error - id is wrong"
-			} else {
-				hostname = value
 			}
 
-			result := models.Ruleresult{Result: "pass", Rulename: "Rule1"}
 			results := models.Ruleresultarray{}
-			results = append(results, &result)
+			for key, value := range scanResult.Results {
+
+				result := models.Ruleresult{Result: value, Rulename: key}
+				results = append(results, &result)
+			}
 			job := &models.Getjob{ID: id, Hostname: hostname, Progress: 100, Result: results}
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
@@ -80,22 +84,21 @@ func main() {
 			}
 			job := &models.Createjob{ID: id, Hostname: &hostName, Username: &userName, Password: &password}
 
-			execution.Execute("apple")
-
-			// cmd1 := exec.Command(fmt.Sprintf("ssh akshay@{s} \"bash -s\" < ubuntu16Harden.sh", hostName))
-			cmd := fmt.Sprintf("sshpass -p %s ssh -o StrictHostKeyChecking=no %s@%s \"bash -s\" < /home/akshay/ubuntu16Harden.sh", password, userName, hostName)
-			fmt.Printf(cmd)
-			fmt.Println()
-			cmd1 := exec.Command("sh", "-c", cmd)
-			output, err1 := cmd1.CombinedOutput()
-			if err1 != nil {
-				fmt.Println(err1)
-				idMap[id] = err1.Error()
-			} else {
-				outputStr := string(output)
-				fmt.Println(outputStr)
-				idMap[id] = outputStr
+			scanResult := scanresultsmap.ScanResult{
+				ComplianceType: compliancetype.CiS,
+				Results:        make(map[string]string),
 			}
+			retrivedScanResult := scanresultsmap.AddOrUpdatedScanResult(id, scanResult)
+			login := logindetails.CreateLoginDetails(hostName, userName, password)
+			err := ruleengine.RunRules(login, &retrivedScanResult)
+
+			if err != nil {
+				retrivedScanResult.ScanStatus = scanstatus.Failed
+				retrivedScanResult.ErrorMessage = err.Error()
+			}
+
+			scanresultsmap.AddOrUpdatedScanResult(id, retrivedScanResult)
+
 			return compliance.NewCreateCreated().WithPayload(job)
 		})
 

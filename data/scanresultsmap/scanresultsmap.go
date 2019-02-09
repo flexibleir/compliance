@@ -19,8 +19,10 @@ type ScanResult struct {
 var ScanResultsMap = make(map[string]*ScanResult)
 
 // AddOrUpdatedScanResult - Add or Update scan result
-func AddOrUpdatedScanResult(id string, scanResult ScanResult) {
+func AddOrUpdatedScanResult(id string, scanResult ScanResult) ScanResult {
 	ScanResultsMap[id] = &scanResult
+	retrivedScanResult := ScanResultsMap[id]
+	return *retrivedScanResult
 }
 
 // GetScanResult - Gets the scan result
