@@ -13,7 +13,6 @@ import (
 var credential = testutils.Credential
 
 func TestRuleEngine(t *testing.T) {
-	scriptPath := ".././scripts/cis/mini/disable_freevxfs.sh"
 	var credential = testutils.Credential
 	login := credential
 
@@ -24,7 +23,7 @@ func TestRuleEngine(t *testing.T) {
 
 	err := RunRules(login, &scanResult)
 	if err != nil {
-		t.Errorf("Execute failed for command %s with error", scriptPath)
+		t.Errorf("Execute failed for command %s with error", ScriptPath)
 		t.Error(err)
 	}
 

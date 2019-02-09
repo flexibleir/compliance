@@ -8,17 +8,46 @@ import (
 	"compliance/execution"
 	"errors"
 	"io/ioutil"
+	"os"
 	"path"
 	"strings"
 )
 
+// ScriptPaht - script folder path
+var ScriptPath = ""
+
+var scriptPath1 = "../../scripts" // for running in debug mode.
+var scriptPath2 = ".././scripts"  // for running in UT.
+var scriptPath3 = "/scripts"      // for running in container.
+
+func SetScriptPath() {
+	if ScriptPath != "" {
+		return
+	}
+	if _, err := os.Stat(scriptPath1); !os.IsNotExist(err) {
+		ScriptPath = scriptPath1
+		return
+	}
+	if _, err := os.Stat(scriptPath2); !os.IsNotExist(err) {
+		ScriptPath = scriptPath2
+		return
+	}
+	if _, err := os.Stat(scriptPath2); !os.IsNotExist(err) {
+		ScriptPath = scriptPath2
+		return
+	}
+}
+
 // RunRules - runes the rules based on compliance type
 func RunRules(login *logindetails.LoginDetails, scanResult *scanresultsmap.ScanResult) error {
 	var folderPath string
+
+	SetScriptPath()
+
 	if scanResult.ComplianceType == compliancetype.CiS {
-		folderPath = "/home/akshay/go/src/compliance/scripts/cis/mini"
+		folderPath = path.Join(ScriptPath, "/cis/mini")
 	} else if scanResult.ComplianceType == compliancetype.PcI {
-		folderPath = ".././scripts/pci/mini"
+		folderPath = path.Join(ScriptPath, "/pci/mini")
 	} else {
 		return errors.New("Compliance type not supported")
 	}

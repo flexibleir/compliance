@@ -57,7 +57,12 @@ func main() {
 				results = append(results, &result)
 			}
 
-			progress := (int64)(scanResult.TotalRules/len(scanResult.Results)) * 100
+			var progress int64
+			if scanResult.TotalRules == 0 {
+				progress = 0
+			} else {
+				progress = (int64)(len(scanResult.Results)/scanResult.TotalRules) * 100
+			}
 
 			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress, Result: results, Compliancetype: "CiS", Scanstatus: "Completed"}
 			return compliance.NewGetIDOK().WithPayload(job)
