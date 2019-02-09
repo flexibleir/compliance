@@ -22,7 +22,7 @@ func TestRuleEngine(t *testing.T) {
 		Results:        make(map[string]string),
 	}
 
-	err := RunRules(compliancetype.CiS, login, &scanResult)
+	err := RunRules(login, &scanResult)
 	if err != nil {
 		t.Errorf("Execute failed for command %s with error", scriptPath)
 		t.Error(err)
