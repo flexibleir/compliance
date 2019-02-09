@@ -2,11 +2,14 @@ package ruleengine
 
 import (
 	"compliance/constants/compliancetype"
+	"compliance/constants/scanstatus"
 	"compliance/data/logindetails"
 	"compliance/data/scanresultsmap"
 	"compliance/execution"
 	"errors"
 	"io/ioutil"
+	"path"
+	"strings"
 )
 
 // RunRules - runes the rules based on compliance type
@@ -25,10 +28,16 @@ func RunRules(comType compliancetype.ComplianceType, login *logindetails.LoginDe
 		return err
 	}
 	scanResult.TotalRules = len(files)
+	scanResult.ScanStatus = scanstatus.InProgress
 
 	for _, file := range files {
-		execution.ExecuteScriptRemote(file.Name(), login)
+		output, err := execution.ExecuteScriptRemote(path.Join(folderPath, file.Name()), login)
+		if err != nil {
+			scanResult.Results[file.Name()] = "Error"
+		} else {
+			scanResult.Results[file.Name()] = strings.Trim(output, "\n")
+		}
 	}
-
+	scanResult.ScanStatus = scanstatus.Completed
 	return nil
 }

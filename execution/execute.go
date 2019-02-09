@@ -20,7 +20,7 @@ func Execute(cmd string) (string, error) {
 // ExecuteScriptRemote - executes command to a remove system using sshpass
 func ExecuteScriptRemote(scriptPath string, login *logindetails.LoginDetails) (string, error) {
 	remoteCommand := fmt.Sprintf("sshpass -p %s ssh -o StrictHostKeyChecking=no %s@%s \"bash -s\" < %s", login.Password, login.UserName, login.HostName, scriptPath)
-	fmt.Print(remoteCommand)
+	fmt.Println(remoteCommand)
 	rmcmd1 := exec.Command("sh", "-c", remoteCommand)
 	outByteArr, err := rmcmd1.CombinedOutput()
 	if err != nil {
