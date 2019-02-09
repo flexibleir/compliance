@@ -1,4 +1,4 @@
-package constants
+package compliancetype
 
 // ComplianceType - Complaince type
 type ComplianceType int32

@@ -1,6 +1,7 @@
 package scanresultsmap
 
 import (
+	"compliance/constants/compliancetype"
 	"testing"
 
 	uuid "github.com/satori/go.uuid"
@@ -14,7 +15,7 @@ func GetUUID() string {
 
 func TestAddOrUpdatedScanResult(t *testing.T) {
 	scanResult := ScanResult{
-		ComplianceType: "A",
+		ComplianceType: compliancetype.CiS,
 	}
 	id := GetUUID()
 	AddOrUpdatedScanResult(id, scanResult)
@@ -22,7 +23,7 @@ func TestAddOrUpdatedScanResult(t *testing.T) {
 	assert.Equal(t, scanResult.ComplianceType, returnedScanResult.ComplianceType,
 		"Compliance types should be same")
 
-	scanResult.ComplianceType = "B"
+	scanResult.ComplianceType = compliancetype.PcI
 
 	returnedScanResult2, _ := GetScanResult(id)
 	assert.NotEqual(t, scanResult.ComplianceType, returnedScanResult2.ComplianceType,
@@ -36,7 +37,7 @@ func TestAddOrUpdatedScanResult(t *testing.T) {
 
 func TestAddOrUpdatedScanResultMultipleAddition(t *testing.T) {
 	scanResult := ScanResult{
-		ComplianceType: "A",
+		ComplianceType: compliancetype.CiS,
 	}
 	id := GetUUID()
 	countBefore := len(ScanResultsMap)
@@ -65,7 +66,7 @@ func TestAddOrUpdateResultWithOutScanResult(t *testing.T) {
 func TestAddOrUpdateResult(t *testing.T) {
 
 	scanResult := ScanResult{
-		ComplianceType: "A",
+		ComplianceType: compliancetype.CiS,
 		Results:        make(map[string]string),
 	}
 	id := GetUUID()

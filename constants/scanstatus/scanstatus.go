@@ -1,4 +1,4 @@
-package constants
+package scanstatus
 
 // ScanStatus - Scan Status
 type ScanStatus int32
