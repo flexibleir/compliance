@@ -10,7 +10,7 @@ import (
 type ScanResult struct {
 	ComplianceType compliancetype.ComplianceType
 	Results        map[string]string
-	TotalRules     int32
+	TotalRules     int
 	ScanStatus     scanstatus.ScanStatus
 	ErrorMessage   string
 }

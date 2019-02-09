@@ -1,6 +1,7 @@
 package execution
 
 import (
+	"compliance/data/logindetails"
 	"fmt"
 	"os/exec"
 )
@@ -17,8 +18,8 @@ func Execute(cmd string) (string, error) {
 }
 
 // ExecuteScriptRemote - executes command to a remove system using sshpass
-func ExecuteScriptRemote(scriptPath string, hostName string, userName string, password string) (string, error) {
-	remoteCommand := fmt.Sprintf("sshpass -p %s ssh -o StrictHostKeyChecking=no %s@%s \"bash -s\" < %s", password, userName, hostName, scriptPath)
+func ExecuteScriptRemote(scriptPath string, login *logindetails.LoginDetails) (string, error) {
+	remoteCommand := fmt.Sprintf("sshpass -p %s ssh -o StrictHostKeyChecking=no %s@%s \"bash -s\" < %s", login.Password, login.UserName, login.HostName, scriptPath)
 	fmt.Print(remoteCommand)
 	rmcmd1 := exec.Command("sh", "-c", remoteCommand)
 	outByteArr, err := rmcmd1.CombinedOutput()
