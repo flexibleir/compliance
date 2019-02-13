@@ -12,7 +12,7 @@ This Image is used for compliance scans on the target system.
 ## Create compliance container
 Run below commands which will download and create a compliance container with the container name **compliance**.
 ```
-docker run -it --name compliance flexibleir/compliance:0.3 /main
+docker run -it --name compliance flexibleir/compliance:0.4 /main
 ```
 
 compliance container will expose **REST Endpoint** with [Swagger][swagger] specification for management operation.
@@ -28,6 +28,10 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' com
 ```
 curl -d '{"hostname": "<Target host name or IP>","id": "<any random id ex - 25>","username":"<Password of the host>","password":"akshay","compliancetype":"CiS"}' -H "Content-Type: application/json" -X POST http://<compliance container's ip>:8080
 ```
+Supported compliancetypes
+1. CiS
+2. PcI
+
 Sample Request
 ```
 curl -d '{"hostname": "172.17.0.2","id": "30","username":"akshay","password":"akshay","compliancetype":"CiS"}' -H "Content-Type: application/json" -X POST http://172.17.0.2:8080
