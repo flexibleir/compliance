@@ -12,7 +12,7 @@ This Image is used for compliance scans on the target system.
 ## Create compliance container
 Run below commands which will download and create a compliance container with the container name **compliance**.
 ```
-docker run -it --privileged --name compliance flexibleir/compliance:0.3 /main
+docker run -it --name compliance flexibleir/compliance:0.4 /main
 ```
 
 compliance container will expose **REST Endpoint** with [Swagger][swagger] specification for management operation.
@@ -26,11 +26,15 @@ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' com
 ### Sample curl's Requests 
 #### Create a Scan
 ```
-curl -d '{"hostname": "<Target host name or IP>","id": "<any random id ex - 25>","username":"<Password of the host>","password":"akshay"}' -H "Content-Type: application/json" -X POST http://<compliance container's ip>:8080
+curl -d '{"hostname": "<Target host name or IP>","id": "<any random id ex - 25>","username":"<Password of the host>","password":"akshay","compliancetype":"CiS"}' -H "Content-Type: application/json" -X POST http://<compliance container's ip>:8080
 ```
+Supported compliancetypes
+1. CiS
+2. PcI
+
 Sample Request
 ```
-curl -d '{"hostname": "172.17.0.2","id": "30","username":"akshay","password":"akshay"}' -H "Content-Type: application/json" -X POST http://172.17.0.2:8080
+curl -d '{"hostname": "172.17.0.2","id": "30","username":"akshay","password":"akshay","compliancetype":"CiS"}' -H "Content-Type: application/json" -X POST http://172.17.0.2:8080
 ```
 
 #### Get Output of Scan
@@ -45,8 +49,25 @@ curl -H "Content-Type: application/json" -X GET http://172.17.0.2:8080/30
 Sample Response
 ```
 {
-    "hostname": "e9772dcf5057\n",
-    "id": "25"
+   "compliancetype":"CiS",
+   "hostname":"172.18.0.2",
+   "id":"30",
+   "progress":100,
+   "result":[
+      {
+         "result":"Warning: Permanently added '172.18.0.2' (ECDSA) to the list of known hosts.\r\nFailed",
+         "rulename":"disable_freevxfs.sh"
+      },
+      {
+         "result":"Passed",
+         "rulename":"ensure_users_dot_files_are_not_group_or_world_writable.sh"
+      },
+      {
+         "result":"Passed",
+         "rulename":"ensure_users_own_their_home_directories.sh"
+      }
+   ],
+   "scanstatus":"Completed"
 }
 ```
 

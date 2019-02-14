@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"strings"
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime/middleware"
@@ -63,8 +64,14 @@ func main() {
 			} else {
 				progress = (int64)(len(scanResult.Results)/scanResult.TotalRules) * 100
 			}
+			var scanType string
+			if scanResult.ComplianceType == compliancetype.CiS {
+				scanType = "CiS"
+			} else {
+				scanType = "PcI"
+			}
 
-			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress, Result: results, Compliancetype: "CiS", Scanstatus: "Completed"}
+			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress, Result: results, Compliancetype: scanType, Scanstatus: "Completed"}
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
 
@@ -83,11 +90,20 @@ func main() {
 			hostName := swag.StringValue(params.Body.Hostname)
 			userName := swag.StringValue(params.Body.Username)
 			password := swag.StringValue(params.Body.Password)
+			complianceTypeRequest := swag.StringValue(params.Body.Compliancetype)
 			job := &models.Createjob{ID: id, Hostname: &hostName, Username: &userName, Password: &password}
+
+			var comType compliancetype.ComplianceType
+
+			if strings.EqualFold("cis", complianceTypeRequest) {
+				comType = compliancetype.CiS
+			} else {
+				comType = compliancetype.PcI
+			}
 
 			scanResult := scanresultsmap.ScanResult{
 				HostName:       hostName,
-				ComplianceType: compliancetype.CiS,
+				ComplianceType: comType,
 				Results:        make(map[string]string),
 			}
 			retrivedScanResult := scanresultsmap.AddOrUpdatedScanResult(id, scanResult)
