@@ -5,6 +5,7 @@ import (
 	"compliance/constants/scanstatus"
 	"compliance/data/scanresultsmap"
 	"compliance/test/testutils"
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -32,4 +33,22 @@ func TestRuleEngine(t *testing.T) {
 	}
 
 	assert.Equal(t, scanstatus.Completed, scanResult.ScanStatus)
+}
+
+func TestLynis(t *testing.T) {
+	var credential = testutils.Credential
+	scanResult := scanresultsmap.ScanResult{
+		ComplianceType: compliancetype.Lynis,
+		Results:        make(map[string]string),
+	}
+
+	err := RunRules(credential, &scanResult)
+	if err != nil {
+		t.Errorf("Execute failed for command %s with error", ScriptPath)
+		t.Error(err)
+	}
+
+	for _, value := range scanResult.Results {
+		fmt.Print(value)
+	}
 }

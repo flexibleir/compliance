@@ -48,6 +48,9 @@ func RunRules(login *logindetails.LoginDetails, scanResult *scanresultsmap.ScanR
 		folderPath = path.Join(ScriptPath, "/cis/mini")
 	} else if scanResult.ComplianceType == compliancetype.PcI {
 		folderPath = path.Join(ScriptPath, "/pci/mini")
+	} else if scanResult.ComplianceType == compliancetype.Lynis {
+		folderPath = path.Join(ScriptPath, "/lynis/mini")
+		execution.CopyFile(path.Join(ScriptPath, "lynis/lynis-remote.tar.gz"), "/tmp/lynis-remote.tar.gz", login)
 	} else {
 		return errors.New("Compliance type not supported")
 	}
