@@ -12,7 +12,7 @@ This Image is used for compliance scans on the target system.
 ## Create compliance container
 Run below commands which will download and create a compliance container with the container name **compliance**.
 ```
-docker run -it --name compliance flexibleir/compliance:0.4 /main
+docker run -it --name compliance flexibleir/compliance:0.5 /main
 ```
 
 compliance container will expose **REST Endpoint** with [Swagger][swagger] specification for management operation.
