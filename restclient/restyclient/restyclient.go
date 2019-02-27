@@ -17,7 +17,7 @@ func Post(url string, token string, body string) (int, string, error) {
 		SetHeader("Accept", "text/html,application/xhtml+xml,application/xml,application/json").
 		SetHeader("Accept-Encoding", "gzip, deflate, br").
 		SetHeader("Upgrade-Insecure-Requests", "1").
-		SetAuthToken(token).
+		//SetAuthToken(token).
 		SetBody(body).
 		Post(url)
 	responseBody := string(resp.Body())
