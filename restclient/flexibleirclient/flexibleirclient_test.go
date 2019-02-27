@@ -34,6 +34,7 @@ func TestCreateIncidentPositive(t *testing.T) {
 
 	request := &CreateIncidentDetails{
 		Description:       "CIS:Scan ID:12 ",
+		UserID:            32,
 		ReportedBy:        "By Docker Container",
 		ReportedByEmail:   "docker@flexibleir.com",
 		ReportedByContact: "123456789",

@@ -20,6 +20,7 @@ type loginDetails struct {
 
 type CreateIncidentDetails struct {
 	Description       string `json:"description"`
+	UserID            int    `json:"user_id"`
 	ReportedBy        string `json:"reported_by"`
 	ReportedByEmail   string `json:"reported_by_email"`
 	ReportedByContact string `json:"reported_by_contact_number"`
