@@ -5,6 +5,7 @@ import "gopkg.in/resty.v1"
 func Get(url string, token string) (int, string, error) {
 	resp, err := resty.R().
 		SetHeader("Accept", "application/json").
+		SetHeader("Content-Type", "application/json").
 		SetAuthToken(token).
 		Get(url)
 	body := string(resp.Body())
@@ -12,17 +13,16 @@ func Get(url string, token string) (int, string, error) {
 	return statusCode, body, err
 }
 
-func Post(url string, token string, body string) (int, string, error) {
+func Post(url string, token string, body string) (int, []byte, error) {
 	resp, err := resty.R().
-		SetHeader("Accept", "text/html,application/xhtml+xml,application/xml,application/json").
-		SetHeader("Accept-Encoding", "gzip, deflate, br").
-		SetHeader("Upgrade-Insecure-Requests", "1").
-		//SetAuthToken(token).
+		SetHeader("Content-Type", "application/json").
+		SetHeader("Accept", "application/json").
+		SetHeader("Authorization", token).
+		// SetAuthToken(token).
 		SetBody(body).
 		Post(url)
-	responseBody := string(resp.Body())
 	statusCode := resp.StatusCode()
-	return statusCode, responseBody, err
+	return statusCode, resp.Body(), err
 }
 
 func Put(url string) (string, error) {
