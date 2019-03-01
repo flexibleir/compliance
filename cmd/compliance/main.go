@@ -9,6 +9,7 @@ import (
 	"compliance/gen/restapi"
 	"compliance/gen/restapi/operations"
 	"compliance/gen/restapi/operations/compliance"
+	"compliance/restclient/flexibleirclient"
 	"compliance/ruleengine"
 	"flag"
 	"fmt"
@@ -22,7 +23,8 @@ import (
 )
 
 var portFlag = flag.Int("port", 8080, "Port to run this service on")
-var idMap = make(map[string]string)
+var fleibleiruser = flag.String("flexibleiruser", "", "FlesibleIR username - which will be used to create tickets.")
+var flesibleirpassword = flag.String("flexibleirpassword", "", "FlesibleIR password - which will be used to create tickets.")
 
 func main() {
 	swaggerSpec, err := loads.Analyzed(restapi.SwaggerJSON, "")
@@ -35,6 +37,7 @@ func main() {
 	defer server.Shutdown()
 
 	flag.Parse()
+	printMessageAboutFlesibleIrFlags()
 	server.Port = *portFlag
 
 	// need to define api's in this place
@@ -123,4 +126,53 @@ func main() {
 	if err := server.Serve(); err != nil {
 		log.Fatalln(err)
 	}
+}
+
+func printMessageAboutFlesibleIrFlags() {
+	if !isFlexibleIrMode() {
+		fmt.Printf("Flesible Ir UserName or Password is not passed so wont be creating tickets after the scan")
+	} else {
+		fmt.Printf("FlexibleIr UserName - %s, Password %s, will be used to create tickets after the scan.", *fleibleiruser, *flesibleirpassword)
+	}
+}
+
+func isFlexibleIrMode() bool {
+	if *fleibleiruser == "" || *flesibleirpassword == "" {
+		return false
+	}
+	return true
+}
+
+func getFlexibleIrBoardLink() string {
+	if !isFlexibleIrMode() {
+		return ""
+	}
+	_, body, _ := flexibleirclient.Login(*fleibleiruser, *flesibleirpassword)
+
+	if !body.Success {
+		fmt.Println("Unable to Login to Flexible Ir using this credential.")
+		return ""
+	}
+	token := body.Response.Token
+	fmt.Println(token)
+
+	request := &flexibleirclient.CreateIncidentDetails{
+		Description:       "CIS:Scan ID:12 ",
+		UserID:            32,
+		ReportedBy:        "By Docker Container",
+		ReportedByEmail:   "docker@flexibleir.com",
+		ReportedByContact: "123456789",
+		APICall:           true,
+		Severity:          "HIGH",
+		Businessline:      "",
+		Category:          "TemplateKanban",
+	}
+	_, response, _ := flexibleirclient.CreateIncident(token, request)
+
+	if !response.Success {
+		fmt.Println("Unable to create ticket in flexible ir.")
+		return ""
+	}
+
+	return response.Response.UserName
 }
