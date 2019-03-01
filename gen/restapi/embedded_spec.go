@@ -144,6 +144,9 @@ func init() {
     "getjob": {
       "type": "object",
       "properties": {
+        "boardurl": {
+          "type": "string"
+        },
         "compliancetype": {
           "type": "string"
         },
@@ -311,6 +314,9 @@ func init() {
     "getjob": {
       "type": "object",
       "properties": {
+        "boardurl": {
+          "type": "string"
+        },
         "compliancetype": {
           "type": "string"
         },

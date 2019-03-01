@@ -75,7 +75,7 @@ func main() {
 			}
 
 			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress,
-				Result: results, Compliancetype: scanType, Scanstatus: "Completed", boardurl: getFlexibleIrBoardLink()}
+				Result: results, Compliancetype: scanType, Scanstatus: "Completed", Boardurl: getFlexibleIrBoardLink()}
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
 
@@ -131,9 +131,9 @@ func main() {
 
 func printMessageAboutFlesibleIrFlags() {
 	if !isFlexibleIrMode() {
-		fmt.Printf("Flesible Ir UserName or Password is not passed so wont be creating tickets after the scan")
+		fmt.Println("FlesibleIr UserName or Password is not passed so wont be creating tickets after the scan")
 	} else {
-		fmt.Printf("FlexibleIr UserName - %s, Password %s, will be used to create tickets after the scan.", *fleibleiruser, *flesibleirpassword)
+		fmt.Printf("FlexibleIr UserName - %s, Password %s, will be used to create tickets after the scan.\n", *fleibleiruser, *flesibleirpassword)
 	}
 }
 

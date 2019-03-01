@@ -16,6 +16,9 @@ import (
 // swagger:model getjob
 type Getjob struct {
 
+	// boardurl
+	Boardurl string `json:"boardurl,omitempty"`
+
 	// compliancetype
 	Compliancetype string `json:"compliancetype,omitempty"`
 
