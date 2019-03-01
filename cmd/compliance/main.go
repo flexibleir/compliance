@@ -74,7 +74,8 @@ func main() {
 				scanType = "PcI"
 			}
 
-			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress, Result: results, Compliancetype: scanType, Scanstatus: "Completed"}
+			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress,
+				Result: results, Compliancetype: scanType, Scanstatus: "Completed", boardurl: getFlexibleIrBoardLink()}
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
 
@@ -144,6 +145,7 @@ func isFlexibleIrMode() bool {
 }
 
 func getFlexibleIrBoardLink() string {
+	var flexibleIrBoardFormat = "https://board.flexibleir.com/b/%s/1"
 	if !isFlexibleIrMode() {
 		return ""
 	}
@@ -174,5 +176,7 @@ func getFlexibleIrBoardLink() string {
 		return ""
 	}
 
-	return response.Response.UserName
+	boardURL := fmt.Sprintf(flexibleIrBoardFormat, response.BoardID)
+	fmt.Printf("FlexibleIr board link - %s\n", boardURL)
+	return boardURL
 }

@@ -45,4 +45,7 @@ func TestCreateIncidentPositive(t *testing.T) {
 	}
 	_, response, _ := CreateIncident(token, request)
 	assert.True(t, response.Success)
+	assert.NotEqual(t, "", response.Message)
+	assert.NotEqual(t, 0, response.BoardSerialNumber)
+	assert.NotEqual(t, "", response.BoardID)
 }

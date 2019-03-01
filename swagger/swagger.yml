@@ -47,6 +47,8 @@ definitions:
         type: string
       compliancetype:
         type: string
+      boardurl:
+        type: string      
       result:
         $ref: '#/definitions/ruleresultarray'
   errorresponse:

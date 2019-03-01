@@ -30,9 +30,16 @@ type CreateIncidentDetails struct {
 	Category          string `json:"category"`
 }
 
-type FlexibleIrResponse struct {
+type FlexibleIrLoginResponse struct {
 	Success  bool          `json:"success"`
 	Response LoginResponse `json:"response"`
+}
+
+type FlexibleIrCreateResponse struct {
+	Success           bool   `json:"success"`
+	Message           string `json:"response"`
+	BoardSerialNumber int    `json:"data"`
+	BoardID           string `json:"board_id"`
 }
 
 type LoginResponse struct {
@@ -41,26 +48,26 @@ type LoginResponse struct {
 	UserName string `json:"user_name"`
 }
 
-func Login(userName string, password string) (int, *FlexibleIrResponse, error) {
+func Login(userName string, password string) (int, *FlexibleIrLoginResponse, error) {
 	login := &loginDetails{
 		Email:    userName,
 		Password: password,
 	}
 	byteArray, _ := json.Marshal(login)
 	jsonRequest := string(byteArray)
-	response := &FlexibleIrResponse{}
+	response := &FlexibleIrLoginResponse{}
 	status, body, err := restyclient.Post(LoginUrl, "", jsonRequest)
 	json.Unmarshal(body, response)
 	return status, response, err
 }
 
-func CreateIncident(token string, request *CreateIncidentDetails) (int, *FlexibleIrResponse, error) {
+func CreateIncident(token string, request *CreateIncidentDetails) (int, *FlexibleIrCreateResponse, error) {
 	token = Bearer + " " + token
 	byteArray, _ := json.Marshal(request)
 	jsonRequest := string(byteArray)
 	fmt.Println(jsonRequest)
 	status, body, err := restyclient.Post(CreateIncidentUrl, token, jsonRequest)
-	response := &FlexibleIrResponse{}
+	response := &FlexibleIrCreateResponse{}
 	json.Unmarshal(body, response)
 	output := string(body)
 	fmt.Println(output)
