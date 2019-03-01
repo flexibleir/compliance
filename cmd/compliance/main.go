@@ -75,7 +75,7 @@ func main() {
 			}
 
 			job := &models.Getjob{ID: id, Hostname: scanResult.HostName, Progress: progress,
-				Result: results, Compliancetype: scanType, Scanstatus: "Completed", Boardurl: getFlexibleIrBoardLink()}
+				Result: results, Compliancetype: scanType, Scanstatus: "Completed", Boardurl: scanResult.BoardURL}
 			return compliance.NewGetIDOK().WithPayload(job)
 		})
 
@@ -118,7 +118,7 @@ func main() {
 				retrivedScanResult.ScanStatus = scanstatus.Failed
 				retrivedScanResult.ErrorMessage = err.Error()
 			}
-
+			retrivedScanResult.BoardURL = getFlexibleIrBoardLink()
 			scanresultsmap.AddOrUpdatedScanResult(id, retrivedScanResult)
 
 			return compliance.NewCreateCreated().WithPayload(job)

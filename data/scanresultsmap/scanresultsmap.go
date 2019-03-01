@@ -14,6 +14,7 @@ type ScanResult struct {
 	TotalRules     int
 	ScanStatus     scanstatus.ScanStatus
 	ErrorMessage   string
+	BoardURL       string
 }
 
 // ScanResultsMap - Scan Result Map
