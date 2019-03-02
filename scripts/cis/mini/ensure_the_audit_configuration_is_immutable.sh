@@ -7,7 +7,7 @@ ensure_the_audit_configuration_is_immutable () {
         then echo -e "Passed"
     else
         echo -e "Failed"
-    fi
+fi
 }
 
 ensure_the_audit_configuration_is_immutable
