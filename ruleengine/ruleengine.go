@@ -1,11 +1,11 @@
 package ruleengine
 
 import (
-	"compliance/constants/compliancetype"
-	"compliance/constants/scanstatus"
-	"compliance/data/logindetails"
-	"compliance/data/scanresultsmap"
-	"compliance/execution"
+	"github.com/flexibleir/compliance/constants/compliancetype"
+	"github.com/flexibleir/compliance/constants/scanstatus"
+	"github.com/flexibleir/compliance/data/logindetails"
+	"github.com/flexibleir/compliance/data/scanresultsmap"
+	"github.com/flexibleir/compliance/execution"
 	"errors"
 	"io/ioutil"
 	"os"
@@ -52,7 +52,7 @@ func RunRules(login *logindetails.LoginDetails, scanResult *scanresultsmap.ScanR
 		folderPath = path.Join(ScriptPath, "/lynis/mini")
 		execution.CopyFile(path.Join(ScriptPath, "lynis/lynis-remote.tar.gz"), "/tmp/lynis-remote.tar.gz", login)
 	} else {
-		return errors.New("Compliance type not supported")
+		return errors.New("github.com/flexibleir/compliance type not supported")
 	}
 
 	files, err := ioutil.ReadDir(folderPath)

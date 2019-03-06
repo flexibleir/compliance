@@ -1,7 +1,7 @@
 package main
 
 import (
-	"compliance/ruleengine"
+	"github.com/flexibleir/compliance/ruleengine"
 	"fmt"
 	"os"
 	"testing"

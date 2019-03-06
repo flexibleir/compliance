@@ -20,7 +20,7 @@ type Getjob struct {
 	Boardurl string `json:"boardurl,omitempty"`
 
 	// compliancetype
-	Compliancetype string `json:"compliancetype,omitempty"`
+	Compliancetype string `json:"github.com/flexibleir/compliancetype,omitempty"`
 
 	// hostname
 	Hostname string `json:"hostname,omitempty"`

@@ -1,7 +1,7 @@
 package execution
 
 import (
-	"compliance/test/testutils"
+	"github.com/flexibleir/compliance/test/testutils"
 	"errors"
 	"os"
 	"testing"

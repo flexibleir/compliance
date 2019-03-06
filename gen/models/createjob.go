@@ -20,7 +20,7 @@ type Createjob struct {
 	// compliancetype
 	// Required: true
 	// Min Length: 1
-	Compliancetype *string `json:"compliancetype"`
+	Compliancetype *string `json:"github.com/flexibleir/compliancetype"`
 
 	// hostname
 	// Required: true
@@ -74,11 +74,11 @@ func (m *Createjob) Validate(formats strfmt.Registry) error {
 
 func (m *Createjob) validateCompliancetype(formats strfmt.Registry) error {
 
-	if err := validate.Required("compliancetype", "body", m.Compliancetype); err != nil {
+	if err := validate.Required("github.com/flexibleir/compliancetype", "body", m.Compliancetype); err != nil {
 		return err
 	}
 
-	if err := validate.MinLength("compliancetype", "body", string(*m.Compliancetype), 1); err != nil {
+	if err := validate.MinLength("github.com/flexibleir/compliancetype", "body", string(*m.Compliancetype), 1); err != nil {
 		return err
 	}
 

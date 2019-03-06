@@ -1,7 +1,7 @@
 package scanresultsmap
 
 import (
-	"compliance/constants/compliancetype"
+	"github.com/flexibleir/compliance/constants/compliancetype"
 	"testing"
 
 	uuid "github.com/satori/go.uuid"
@@ -21,18 +21,18 @@ func TestAddOrUpdatedScanResult(t *testing.T) {
 	AddOrUpdatedScanResult(id, scanResult)
 	returnedScanResult, _ := GetScanResult(id)
 	assert.Equal(t, scanResult.ComplianceType, returnedScanResult.ComplianceType,
-		"Compliance types should be same")
+		"github.com/flexibleir/compliance types should be same")
 
 	scanResult.ComplianceType = compliancetype.PcI
 
 	returnedScanResult2, _ := GetScanResult(id)
 	assert.NotEqual(t, scanResult.ComplianceType, returnedScanResult2.ComplianceType,
-		"Compliance types should not be same")
+		"github.com/flexibleir/compliance types should not be same")
 
 	AddOrUpdatedScanResult(id, scanResult)
 	returnedScanResult3, _ := GetScanResult(id)
 	assert.Equal(t, scanResult.ComplianceType, returnedScanResult3.ComplianceType,
-		"Compliance types should be same")
+		"github.com/flexibleir/compliance types should be same")
 }
 
 func TestAddOrUpdatedScanResultMultipleAddition(t *testing.T) {

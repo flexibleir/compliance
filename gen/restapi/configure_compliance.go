@@ -10,8 +10,8 @@ import (
 	runtime "github.com/go-openapi/runtime"
 	middleware "github.com/go-openapi/runtime/middleware"
 
-	"compliance/gen/restapi/operations"
-	"compliance/gen/restapi/operations/compliance"
+	"github.com/flexibleir/compliance/gen/restapi/operations"
+	"github.com/flexibleir/compliance/gen/restapi/operations/compliance"
 )
 
 //go:generate swagger generate server --target ../../gen --name Compliance --spec ../../swagger/swagger.yml --exclude-main

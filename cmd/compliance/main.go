@@ -1,21 +1,22 @@
 package main
 
 import (
-	"compliance/constants/compliancetype"
-	"compliance/constants/scanstatus"
-	"compliance/data/logindetails"
-	"compliance/data/scanresultsmap"
-	"compliance/gen/models"
-	"compliance/gen/restapi"
-	"compliance/gen/restapi/operations"
-	"compliance/gen/restapi/operations/compliance"
-	"compliance/restclient/flexibleirclient"
-	"compliance/ruleengine"
 	"flag"
 	"fmt"
 	"log"
 	"os/exec"
 	"strings"
+
+	"github.com/flexibleir/compliance/constants/compliancetype"
+	"github.com/flexibleir/compliance/constants/scanstatus"
+	"github.com/flexibleir/compliance/data/logindetails"
+	"github.com/flexibleir/compliance/data/scanresultsmap"
+	"github.com/flexibleir/compliance/gen/models"
+	"github.com/flexibleir/compliance/gen/restapi"
+	"github.com/flexibleir/compliance/gen/restapi/operations"
+	"github.com/flexibleir/compliance/gen/restapi/operations/compliance"
+	"github.com/flexibleir/compliance/restclient/flexibleirclient"
+	"github.com/flexibleir/compliance/ruleengine"
 
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime/middleware"

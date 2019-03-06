@@ -1,7 +1,7 @@
 package flexibleirclient
 
 import (
-	"compliance/restclient/restyclient"
+	"github.com/flexibleir/compliance/restclient/restyclient"
 	"encoding/json"
 	"fmt"
 )

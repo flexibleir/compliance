@@ -29,15 +29,15 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "description": "compliance appliacnation",
-    "title": "compliance Application",
+    "description": "github.com/flexibleir/compliance appliacnation",
+    "title": "github.com/flexibleir/compliance Application",
     "version": "1.0.0"
   },
   "paths": {
     "/": {
       "post": {
         "tags": [
-          "compliance"
+          "github.com/flexibleir/compliance"
         ],
         "operationId": "create",
         "parameters": [
@@ -68,7 +68,7 @@ func init() {
     "/{id}": {
       "get": {
         "tags": [
-          "compliance"
+          "github.com/flexibleir/compliance"
         ],
         "responses": {
           "200": {
@@ -102,10 +102,10 @@ func init() {
         "hostname",
         "username",
         "password",
-        "compliancetype"
+        "github.com/flexibleir/compliancetype"
       ],
       "properties": {
-        "compliancetype": {
+        "github.com/flexibleir/compliancetype": {
           "type": "string",
           "minLength": 1
         },
@@ -147,7 +147,7 @@ func init() {
         "boardurl": {
           "type": "string"
         },
-        "compliancetype": {
+        "github.com/flexibleir/compliancetype": {
           "type": "string"
         },
         "hostname": {
@@ -199,15 +199,15 @@ func init() {
   ],
   "swagger": "2.0",
   "info": {
-    "description": "compliance appliacnation",
-    "title": "compliance Application",
+    "description": "github.com/flexibleir/compliance appliacnation",
+    "title": "github.com/flexibleir/compliance Application",
     "version": "1.0.0"
   },
   "paths": {
     "/": {
       "post": {
         "tags": [
-          "compliance"
+          "github.com/flexibleir/compliance"
         ],
         "operationId": "create",
         "parameters": [
@@ -238,7 +238,7 @@ func init() {
     "/{id}": {
       "get": {
         "tags": [
-          "compliance"
+          "github.com/flexibleir/compliance"
         ],
         "responses": {
           "200": {
@@ -272,10 +272,10 @@ func init() {
         "hostname",
         "username",
         "password",
-        "compliancetype"
+        "github.com/flexibleir/compliancetype"
       ],
       "properties": {
-        "compliancetype": {
+        "github.com/flexibleir/compliancetype": {
           "type": "string",
           "minLength": 1
         },
@@ -317,7 +317,7 @@ func init() {
         "boardurl": {
           "type": "string"
         },
-        "compliancetype": {
+        "github.com/flexibleir/compliancetype": {
           "type": "string"
         },
         "hostname": {

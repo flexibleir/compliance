@@ -1,8 +1,8 @@
 package scanresultsmap
 
 import (
-	"compliance/constants/compliancetype"
-	"compliance/constants/scanstatus"
+	"github.com/flexibleir/compliance/constants/compliancetype"
+	"github.com/flexibleir/compliance/constants/scanstatus"
 	"errors"
 )
 

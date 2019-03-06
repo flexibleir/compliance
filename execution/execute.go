@@ -1,7 +1,7 @@
 package execution
 
 import (
-	"compliance/data/logindetails"
+	"github.com/flexibleir/compliance/data/logindetails"
 	"fmt"
 	"os/exec"
 )

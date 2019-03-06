@@ -19,7 +19,7 @@ import (
 	strfmt "github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 
-	"compliance/gen/restapi/operations/compliance"
+	"github.com/flexibleir/compliance/gen/restapi/operations/compliance"
 )
 
 // NewComplianceAPI creates a new Compliance instance
@@ -144,11 +144,11 @@ func (o *ComplianceAPI) Validate() error {
 	}
 
 	if o.ComplianceGetIDHandler == nil {
-		unregistered = append(unregistered, "compliance.GetIDHandler")
+		unregistered = append(unregistered, "github.com/flexibleir/compliance.GetIDHandler")
 	}
 
 	if o.ComplianceCreateHandler == nil {
-		unregistered = append(unregistered, "compliance.CreateHandler")
+		unregistered = append(unregistered, "github.com/flexibleir/compliance.CreateHandler")
 	}
 
 	if len(unregistered) > 0 {

@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	models "compliance/gen/models"
+	models "github.com/flexibleir/compliance/gen/models"
 )
 
 // CreateCreatedCode is the HTTP code returned for type CreateCreated

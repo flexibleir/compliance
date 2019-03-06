@@ -1,7 +1,7 @@
 package flexibleirclient
 
 import (
-	"compliance/test/testutils"
+	"github.com/flexibleir/compliance/test/testutils"
 	"fmt"
 	"testing"
 

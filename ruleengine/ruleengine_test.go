@@ -1,10 +1,10 @@
 package ruleengine
 
 import (
-	"compliance/constants/compliancetype"
-	"compliance/constants/scanstatus"
-	"compliance/data/scanresultsmap"
-	"compliance/test/testutils"
+	"github.com/flexibleir/compliance/constants/compliancetype"
+	"github.com/flexibleir/compliance/constants/scanstatus"
+	"github.com/flexibleir/compliance/data/scanresultsmap"
+	"github.com/flexibleir/compliance/test/testutils"
 	"fmt"
 	"testing"
 

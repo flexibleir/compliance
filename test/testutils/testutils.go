@@ -1,6 +1,6 @@
 package testutils
 
-import "compliance/data/logindetails"
+import "github.com/flexibleir/compliance/data/logindetails"
 
 const hostName = "localhost"
 const userName = "akshay"
