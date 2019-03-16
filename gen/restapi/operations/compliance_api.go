@@ -144,11 +144,11 @@ func (o *ComplianceAPI) Validate() error {
 	}
 
 	if o.ComplianceGetIDHandler == nil {
-		unregistered = append(unregistered, "github.com/flexibleir/compliance.GetIDHandler")
+		unregistered = append(unregistered, "compliance.GetIDHandler")
 	}
 
 	if o.ComplianceCreateHandler == nil {
-		unregistered = append(unregistered, "github.com/flexibleir/compliance.CreateHandler")
+		unregistered = append(unregistered, "compliance.CreateHandler")
 	}
 
 	if len(unregistered) > 0 {
