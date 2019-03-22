@@ -25,6 +25,9 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 mkdir $HOME/go/src -p
 
+# Install go dep
+sudo apt install go-dep -y
+
 # Install GCC
 sudo apt install gcc -y
 
